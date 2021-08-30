@@ -8,16 +8,15 @@ const ToggleButtonStyled = styled(ToggleButton)`
     width: 80px;
     height: 40px;
     border-radius: 50px 0px !important;
-    background-color: ${(props) => (props.isactive === 'true' ? colors.buttonHover : colors.buttonNormal)} !important;
+    background-color: ${(props) => (props.isActive ? colors.buttonHover : colors.buttonNormal)} !important;
   &:hover{
     background-color: ${colors.buttonHover} !important;
   }
 `;
 
-/* eslint-disable react/jsx-props-no-spreading */
 const HeaderButtonStyled = (props) => {
   const { isActive, ...params } = props;
-  return <ToggleButtonStyled isactive={isActive.toString()} {...params} />;
+  return <ToggleButtonStyled isActive={isActive} {...params} />;
 };
 
 HeaderButtonStyled.propTypes = {
