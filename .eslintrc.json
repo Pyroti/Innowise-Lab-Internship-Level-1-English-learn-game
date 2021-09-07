@@ -16,13 +16,18 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "react-hooks"
     ],
-<<<<<<< HEAD
-    "rules": {}
-=======
     "rules": {
-        "react/jsx-props-no-spreading": "off"
+        "react/jsx-props-no-spreading": "off",
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+        "no-param-reassign": [
+            2,
+            {
+                "props": false
+            }
+        ]
     }
->>>>>>> feature/Start-page
 }

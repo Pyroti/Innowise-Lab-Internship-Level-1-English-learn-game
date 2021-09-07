@@ -1,5 +1,12 @@
 {
   "welcome": "Welcome!",
   "start": "Start game",
-  "getReady": "Get ready"
+  "getReady": "Get ready",
+  "ru": "ru",
+  "en": "en",
+  "error": "Something went wrong ...",
+  "loading": "Loading ...",
+  "right": "Right",
+  "wrong": "Wrong",
+  "playerGets": "The player gets"
 }

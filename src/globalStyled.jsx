@@ -13,6 +13,10 @@ const Global = createGlobalStyle`
 h1{
   text-align: center;
 }
+
+a { 
+    text-decoration: none;
+}
 `;
 
 export default Global;
