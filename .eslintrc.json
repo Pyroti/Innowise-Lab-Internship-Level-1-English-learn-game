@@ -18,5 +18,11 @@
     "plugins": [
         "react"
     ],
+<<<<<<< HEAD
     "rules": {}
+=======
+    "rules": {
+        "react/jsx-props-no-spreading": "off"
+    }
+>>>>>>> feature/Start-page
 }

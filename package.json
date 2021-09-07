@@ -26,7 +26,12 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+<<<<<<< HEAD
     "eject": "react-scripts eject"
+=======
+    "eject": "react-scripts eject",
+    "eslint": "npx eslint --fix ./src"
+>>>>>>> feature/Start-page
   },
   "eslintConfig": {
     "extends": [
