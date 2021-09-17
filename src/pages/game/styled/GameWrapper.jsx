@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import colors from '../../../core/constants/colors';
 
 const GameWrapper = styled.div`
   position: relative;
@@ -6,11 +7,15 @@ const GameWrapper = styled.div`
   height: 500px;
   display: flex;
   flex-direction: column;
-  justify-content: center;  
+  justify-content: center;
   align-items: center;
-  background: white;
+  background: ${colors.backgroundContentWrapper};
   padding: 20px;
-  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.42);
+  box-shadow: 4px 4px 8px 0px ${colors.gameShadow};
+  @media (max-width: 768px) {
+    width: 350px;
+    height: 450px;
+  }
 `;
 
 export default GameWrapper;

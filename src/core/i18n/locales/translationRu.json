@@ -8,5 +8,14 @@
   "loading": "Загрузка...",
   "right": "Верно",
   "wrong": "Неверно",
-  "playerGets": "Игрок получает"
+  "playerGets": "Игрок получает",
+  "rightAnswers": "Правильные ответы:",
+  "wrongAnswers": "Неправильные ответы:",
+  "youScored": "Вы набрали:",
+  "points": "очков",
+  "numCorrectAnswers": "Количество правильных ответов:",
+  "numWrongAnswers": "Количество неправильных ответов:",
+  "percentageCorrectAnswers": "Процент правильных ответов:",
+  "restartGame": "Сыграть еще раз",
+  "printToPdf": "Распечатать в PDF"
 }

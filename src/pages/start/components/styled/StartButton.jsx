@@ -15,20 +15,20 @@ const StartButton = styled.div`
 
   &::after {
     content: '';
-    background-image: url("${arrowRight}");
+    background-image: url('${arrowRight}');
     background-size: 100% 100%;
     width: 22px;
     height: 6px;
     margin-top: 5px;
     margin-left: 5px;
-    transition: 0.3s;    
+    transition: 0.3s;
   }
 
   &:hover {
     border: 3px ${color.buttonHover} solid;
     border-radius: 40px;
     &::after {
-      margin-left: 20px;      
+      margin-left: 20px;
       transition: 0.3s;
     }
   }

@@ -5,13 +5,15 @@ import styled from 'styled-components';
 import colors from '../../../constants/colors';
 
 const ToggleButtonStyled = styled(ToggleButton)`
+  && {
     width: 80px;
     height: 40px;
     border-radius: 50px 0px !important;
-    background-color: ${(props) => (props.isActive ? colors.buttonHover : colors.buttonNormal)} !important;
+    background-color: ${(props) => (props.isActive ? colors.buttonHover : colors.buttonNormal)};
     cursor: pointer;
-  &:hover{
-    background-color: ${colors.buttonHover} !important;
+    &:hover {
+      background-color: ${colors.buttonHover};
+    }
   }
 `;
 

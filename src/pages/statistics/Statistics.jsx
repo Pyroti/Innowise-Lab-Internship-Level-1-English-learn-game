@@ -1,34 +1,24 @@
 import React, { useContext } from 'react';
-import statisticsContext from '../../statisticsContext';
+import PointsContext from '../../pointsContext';
+import StatisticsContext from '../../statisticsContext';
 import StartPageMain from '../start/styled/StartPageMain';
+import GameAnswerStatistics from './component/gameAnswersStatistics/GameAnswersStatistics';
+import GameStatistics from './component/gameStatistics/GameStatistics';
+import StatisticsButtons from './component/statisticsButtons/StatisticsButtons';
+import StatisticsWrap from './styled/StatisticsWrap';
 
 export default function Statistics() {
-  const answers = useContext(statisticsContext);
+  const [answers] = useContext(StatisticsContext);
+  const [point] = useContext(PointsContext);
+  const ref = React.createRef();
+
   return (
-    <>
-      <StartPageMain>
-        <p>right answers:</p>
-        {answers.rightAnswers.map((item) => (
-          <div>
-            <span key={item.word}>{item.word}</span>
-            {' '}
-            -
-            {' '}
-            <span key={item.wordTranslate}>{item.wordTranslate}</span>
-          </div>
-        ))}
-        <br />
-        <p>wrong answers:</p>
-        {answers.wrongAnswers.map((item) => (
-          <div>
-            <span key={item.word}>{item.word}</span>
-            {' '}
-            -
-            {' '}
-            <span key={item.wordTranslate}>{item.wordTranslate}</span>
-          </div>
-        ))}
-      </StartPageMain>
-    </>
+    <StartPageMain>
+      <StatisticsWrap ref={ref}>
+        <GameStatistics answers={answers} point={point} />
+        <GameAnswerStatistics answers={answers} />
+      </StatisticsWrap>
+      <StatisticsButtons trRef={ref} />
+    </StartPageMain>
   );
 }

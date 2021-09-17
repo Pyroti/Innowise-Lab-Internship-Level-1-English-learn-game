@@ -1,8 +1,10 @@
 import React from 'react';
 
-const statisticsContext = React.createContext({
+export const initialStateStatistics = {
   rightAnswers: [],
   wrongAnswers: [],
-});
+};
 
-export default statisticsContext;
+const StatisticsContext = React.createContext(initialStateStatistics);
+
+export default StatisticsContext;

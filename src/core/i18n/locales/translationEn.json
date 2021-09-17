@@ -8,5 +8,14 @@
   "loading": "Loading ...",
   "right": "Right",
   "wrong": "Wrong",
-  "playerGets": "The player gets"
+  "playerGets": "The player gets",
+  "rightAnswers": "Right answers:",
+  "wrongAnswers": "Wrong answers:",
+  "youScored": "You Scored:",
+  "points": "points",
+  "numCorrectAnswers": "Number of correct answers:",
+  "numWrongAnswers": "Number of wrong answers:",
+  "percentageCorrectAnswers": "Percentage of correct answers:",
+  "restartGame": "Restart Game",
+  "printToPdf": "Print to PDF"
 }
