@@ -1,7 +1,7 @@
 const MainRoutes = {
   home: '/',
   game: '/Game',
-  statistics: '/Statistics',
+  statistics: '/Statistics'
 };
 
 export default MainRoutes;

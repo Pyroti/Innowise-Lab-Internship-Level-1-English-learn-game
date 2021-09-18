@@ -6,6 +6,7 @@ import correctAnswerSound from '../../../../assets/music/correctAnswer.mp3';
 import wrongAnswerSound from '../../../../assets/music/wrongAnswer.mp3';
 import AppConfig from '../../../../core/constants/AppConfig';
 import MainRouters from '../../../../core/constants/MainRouters';
+import timerConfig from '../../../../core/constants/timerConfig';
 import urls from '../../../../core/constants/urls';
 import PointsContext from '../../../../pointsContext';
 import StatisticsContext from '../../../../statisticsContext';
@@ -18,21 +19,26 @@ import MusicButton from './styled/MusicButton';
 import ScoreRatio from './styled/ScoreRatio';
 import WordCard from './styled/WordCard';
 
-function GameContent({
-  words,
-  wordId,
-  shuffleTranslation,
-  setNewPageWithWords,
-  setWordId,
-}) {
+const multiplyСoefficient = 2;
+const initialCorrectAnswers = 1;
+const initialScoreRation = 10;
+const initialValueScoreRatio = 10;
+const threeCorrectAnswers = 3;
+const sixCorrectAnswers = 6;
+const initialPointsBorderValue = 0;
+
+function GameContent(props) {
+  const {
+    words, wordId, shuffleTranslation, setNewPageWithWords, setWordId
+  } = props;
   const [, setAnswers] = useContext(StatisticsContext);
   const [point, setPoint] = useContext(PointsContext);
-  const [scoreRatio, setScoreRatio] = useState(AppConfig.initialScoreRation);
+  const [scoreRatio, setScoreRatio] = useState(initialScoreRation);
   const [corNumUserAnswers, setCorNumUserAnswers] = useState(
-    AppConfig.initialCorrectAnswers,
+    initialCorrectAnswers
   );
   const [pointsBorderValue, setPointsBorderValue] = useState(
-    AppConfig.initialPointsBorderValue,
+    initialPointsBorderValue
   );
   const [redirect, setRedirect] = useState(false);
 
@@ -48,24 +54,20 @@ function GameContent({
   const setPointInfo = () => {
     setPoint((prevPoint) => prevPoint + scoreRatio);
     setCorNumUserAnswers(
-      (prevCorrectNumber) => prevCorrectNumber + AppConfig.defaultOne,
+      (prevCorrectNumber) => prevCorrectNumber + AppConfig.defaultOne
     );
-    if (corNumUserAnswers === AppConfig.threeCorrectAnswers) {
-      setScoreRatio(
-        (prevCoefPoint) => prevCoefPoint * AppConfig.multiplyСoefficient,
-      );
-    } else if (corNumUserAnswers === AppConfig.SixCorrectAnswers) {
-      setScoreRatio(
-        (prevCoefPoint) => prevCoefPoint * AppConfig.multiplyСoefficient,
-      );
+    if (corNumUserAnswers === threeCorrectAnswers) {
+      setScoreRatio((prevCoefPoint) => prevCoefPoint * multiplyСoefficient);
+    } else if (corNumUserAnswers === sixCorrectAnswers) {
+      setScoreRatio((prevCoefPoint) => prevCoefPoint * multiplyСoefficient);
     }
   };
 
   const setWindowCorrectAnswers = () => {
     setPointsBorderValue(
-      (prevPointsBorderValue) => prevPointsBorderValue + AppConfig.defaultOne,
+      (prevPointsBorderValue) => prevPointsBorderValue + AppConfig.defaultOne
     );
-    if (pointsBorderValue >= AppConfig.threeCorrectAnswers) {
+    if (pointsBorderValue >= threeCorrectAnswers) {
       setPointsBorderValue(AppConfig.defaultOne);
     }
   };
@@ -76,18 +78,18 @@ function GameContent({
     playAudio(correctAnswerSound);
     setAnswers((prevAnswers) => ({
       ...prevAnswers,
-      rightAnswers: [...prevAnswers.rightAnswers, words[wordId]],
+      rightAnswers: [...prevAnswers.rightAnswers, words[wordId]]
     }));
   };
 
   const setWrongAnswer = () => {
-    setScoreRatio(AppConfig.initialValueScoreRatio);
-    setCorNumUserAnswers(AppConfig.initialCorrectAnswers);
-    setPointsBorderValue(AppConfig.initialPointsBorderValue);
+    setScoreRatio(initialValueScoreRatio);
+    setCorNumUserAnswers(initialCorrectAnswers);
+    setPointsBorderValue(initialPointsBorderValue);
     playAudio(wrongAnswerSound);
     setAnswers((prevAnswers) => ({
       ...prevAnswers,
-      wrongAnswers: [...prevAnswers.wrongAnswers, words[wordId]],
+      wrongAnswers: [...prevAnswers.wrongAnswers, words[wordId]]
     }));
   };
 
@@ -114,8 +116,8 @@ function GameContent({
   return (
     <>
       <Timer
-        seconds={AppConfig.secondsForGame}
-        size={AppConfig.sizeForGameTimer}
+        seconds={timerConfig.secondsForGame}
+        size={timerConfig.sizeForGameTimer}
         command={redirectToStatistics}
       />
       <GameWrapper>
@@ -148,7 +150,7 @@ GameContent.propTypes = {
   wordId: PropTypes.number.isRequired,
   shuffleTranslation: PropTypes.instanceOf(Array).isRequired,
   setNewPageWithWords: PropTypes.func.isRequired,
-  setWordId: PropTypes.func.isRequired,
+  setWordId: PropTypes.func.isRequired
 };
 
 export default GameContent;

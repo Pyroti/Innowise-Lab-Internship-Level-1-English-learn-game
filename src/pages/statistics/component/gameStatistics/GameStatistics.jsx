@@ -5,6 +5,8 @@ import AppConfig from '../../../../core/constants/AppConfig';
 import GameScore from './styled/GameScore';
 import GameScoreWrap from './styled/GameScoreWrap';
 
+const oneHundredPercent = 100;
+
 export default function GameStatistics(props) {
   const { answers, point } = props;
   const { t } = useTranslation();
@@ -16,16 +18,16 @@ export default function GameStatistics(props) {
     : sumAllAnswers;
   const percentageCorrectAnswers = (
     (numCorrectAnswers / sumAllAnswers)
-    * AppConfig.oneHundredPercent
+    * oneHundredPercent
   ).toFixed(1);
 
   return (
     <GameScoreWrap>
       <GameScore>{`${t('youScored')} ${point} ${t('points')}`}</GameScore>
       <GameScore>{`${t('numCorrectAnswers')} ${numCorrectAnswers}`}</GameScore>
-      <GameScore>{`${t('numWrongAnswers')}  ${numWrongAnswers}`}</GameScore>
+      <GameScore>{`${t('numWrongAnswers')} ${numWrongAnswers}`}</GameScore>
       <GameScore>
-        {`${t('percentageCorrectAnswers')}  ${percentageCorrectAnswers}%`}
+        {`${t('percentageCorrectAnswers')} ${percentageCorrectAnswers}%`}
       </GameScore>
     </GameScoreWrap>
   );
@@ -33,5 +35,5 @@ export default function GameStatistics(props) {
 
 GameStatistics.propTypes = {
   answers: PropTypes.oneOfType([PropTypes.object]).isRequired,
-  point: PropTypes.number.isRequired,
+  point: PropTypes.number.isRequired
 };

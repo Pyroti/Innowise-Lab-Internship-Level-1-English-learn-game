@@ -2,7 +2,8 @@
     "env": {
         "browser": true,
         "es2021": true,
-        "node": true
+        "node": true,
+        "jest": true
     },
     "extends": [
         "plugin:react/recommended",
@@ -27,6 +28,13 @@
             2,
             {
                 "props": false
+            }
+        ],
+        "comma-dangle": [
+            "error",
+            {
+                "imports": "never",
+                "exports": "never"
             }
         ]
     }

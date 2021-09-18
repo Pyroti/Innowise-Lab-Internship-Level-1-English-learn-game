@@ -6,7 +6,7 @@ export default function shuffle(array) {
     curIndex -= 1;
     [array[curIndex], array[randomIndex]] = [
       array[randomIndex],
-      array[curIndex],
+      array[curIndex]
     ];
   }
   return array;

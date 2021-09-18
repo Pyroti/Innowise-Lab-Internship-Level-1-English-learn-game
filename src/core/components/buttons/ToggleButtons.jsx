@@ -24,6 +24,7 @@ export default function ToggleButtons() {
         isActive={isActive}
         onClick={changeLanguage(languages.ru)}
         value={languages.ru}
+        data-testid={languages.ru}
       >
         {t('ru')}
       </HeaderButtonStyled>
@@ -31,6 +32,7 @@ export default function ToggleButtons() {
         isActive={!isActive}
         onClick={changeLanguage(languages.en)}
         value={languages.en}
+        data-testid={languages.en}
       >
         {t('en')}
       </HeaderButtonStyled>

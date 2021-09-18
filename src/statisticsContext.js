@@ -2,7 +2,7 @@ import React from 'react';
 
 export const initialStateStatistics = {
   rightAnswers: [],
-  wrongAnswers: [],
+  wrongAnswers: []
 };
 
 const StatisticsContext = React.createContext(initialStateStatistics);

@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import AppConfig from '../../../../../../core/constants/AppConfig';
 import colors from '../../../../../../core/constants/colors';
 import GamePointBorderWrap from './styled/GamePointBorderWrap';
 import GamePointBorderStyled from './styled/GamePointsBorderStyled';
+
+const oneCorrectAnswer = 1;
+const twoCorrectAnswer = 2;
+const threeCorrectAnswer = 3;
 
 function GamePointsBorder(props) {
   const { pointsBorderValue } = props;
@@ -11,21 +14,21 @@ function GamePointsBorder(props) {
     <GamePointBorderWrap>
       <GamePointBorderStyled
         color={
-          pointsBorderValue >= AppConfig.defaultOneCorrectAnswer
+          pointsBorderValue >= oneCorrectAnswer
             ? colors.pointBorder
             : colors.colorless
         }
       />
       <GamePointBorderStyled
         color={
-          pointsBorderValue >= AppConfig.defaultTwoCorrectAnswer
+          pointsBorderValue >= twoCorrectAnswer
             ? colors.pointBorder
             : colors.colorless
         }
       />
       <GamePointBorderStyled
         color={
-          pointsBorderValue >= AppConfig.defaultThreeCorrectAnswer
+          pointsBorderValue >= threeCorrectAnswer
             ? colors.pointBorder
             : colors.colorless
         }
@@ -35,7 +38,7 @@ function GamePointsBorder(props) {
 }
 
 GamePointsBorder.propTypes = {
-  pointsBorderValue: PropTypes.number.isRequired,
+  pointsBorderValue: PropTypes.number.isRequired
 };
 
 export default GamePointsBorder;

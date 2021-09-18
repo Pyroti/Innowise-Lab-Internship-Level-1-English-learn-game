@@ -23,7 +23,7 @@ const HeaderButtonStyled = (props) => {
 };
 
 HeaderButtonStyled.propTypes = {
-  isActive: PropTypes.bool.isRequired,
+  isActive: PropTypes.bool.isRequired
 };
 
 export default HeaderButtonStyled;

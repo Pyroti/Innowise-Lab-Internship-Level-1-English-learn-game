@@ -8,7 +8,7 @@ const colors = {
   loaderBorder: '#f3f3f3',
   loaderBorderTop: '#3498db',
   pointBorder: '#FB6589',
-  backgroundContentWrapper: '#fff',
+  backgroundContentWrapper: '#fff'
 };
 
 export default colors;

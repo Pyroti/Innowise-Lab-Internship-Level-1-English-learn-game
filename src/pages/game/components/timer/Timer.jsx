@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import AppConfig from '../../../../core/constants/AppConfig';
+import timerConfig from '../../../../core/constants/timerConfig';
 import RevolvingCircle from './styled/RevolvingCircle';
 import TimeElement from './styled/TimeElement';
 import TimeWrapper from './styled/TimeWrapper';
@@ -15,7 +16,7 @@ function Timer(props) {
     if (time) {
       timerId = setInterval(() => {
         setTime((prevTime) => prevTime - AppConfig.defaultOne);
-      }, AppConfig.secondForTimer);
+      }, timerConfig.secondForTimer);
     }
 
     return () => {
@@ -38,7 +39,7 @@ function Timer(props) {
 Timer.propTypes = {
   seconds: PropTypes.number.isRequired,
   size: PropTypes.string.isRequired,
-  command: PropTypes.func.isRequired,
+  command: PropTypes.func.isRequired
 };
 
 export default Timer;

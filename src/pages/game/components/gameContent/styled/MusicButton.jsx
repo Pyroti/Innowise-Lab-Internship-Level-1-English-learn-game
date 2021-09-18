@@ -25,7 +25,7 @@ const MusicButton = (props) => {
 };
 
 MusicButton.propTypes = {
-  playAudio: PropTypes.func.isRequired,
+  playAudio: PropTypes.func.isRequired
 };
 
 export default MusicButton;

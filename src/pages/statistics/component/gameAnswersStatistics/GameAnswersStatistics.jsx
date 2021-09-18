@@ -35,5 +35,5 @@ export default function GameAnswerStatistics(props) {
 }
 
 GameAnswerStatistics.propTypes = {
-  answers: PropTypes.oneOfType([PropTypes.object]).isRequired,
+  answers: PropTypes.oneOfType([PropTypes.object]).isRequired
 };

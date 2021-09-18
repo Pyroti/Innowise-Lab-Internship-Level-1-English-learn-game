@@ -6,7 +6,6 @@ const StartButton = styled.div`
   font-size: 20px;
   cursor: pointer;
   color: ${color.appColor};
-  margin-top: 100px;
   display: flex;
   align-items: center;
   z-index: 10;

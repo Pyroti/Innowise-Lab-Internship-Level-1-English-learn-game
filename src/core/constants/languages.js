@@ -1,6 +1,6 @@
 const languages = {
   ru: 'ru',
-  en: 'en',
+  en: 'en'
 };
 
 export default languages;
