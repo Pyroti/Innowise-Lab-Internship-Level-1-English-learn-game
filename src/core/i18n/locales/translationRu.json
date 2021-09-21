@@ -1,5 +1,25 @@
 {
   "welcome": "Добро пожаловать!",
   "start": "Начать игру",
-  "getReady": "Приготовьтесь"
+  "getReady": "Приготовьтесь",
+  "ru": "РУС",
+  "en": "АНГЛ",
+  "error": "Произошла ошибка...",
+  "loading": "Загрузка...",
+  "right": "Верно",
+  "wrong": "Неверно",
+  "playerGets": "Игрок получает",
+  "rightAnswers": "Правильные ответы:",
+  "wrongAnswers": "Неправильные ответы:",
+  "youScored": "Вы набрали:",
+  "points": "очков",
+  "numCorrectAnswers": "Количество правильных ответов:",
+  "numWrongAnswers": "Количество неправильных ответов:",
+  "percentageCorrectAnswers": "Процент правильных ответов:",
+  "restartGame": "Сыграть еще раз",
+  "printToPdf": "Распечатать в PDF",
+  "theGameIsNotOver": "Игра не окончена!",
+  "TheResultAreReset": "Если вы закроете игру ваши результаты обнулятся.",
+  "CloseTheGame": "Закрыть игру",
+  "Cancel": "Отмена"
 }

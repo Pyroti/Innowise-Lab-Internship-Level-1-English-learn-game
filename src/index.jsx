@@ -9,5 +9,5 @@ ReactDOM.render(
     <Global />
     <App />
   </React.StrictMode>,
-  document.getElementById('root'),
+  document.getElementById('root')
 );
