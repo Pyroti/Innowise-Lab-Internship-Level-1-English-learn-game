@@ -34,7 +34,7 @@ function GamePage() {
   useState(() => {
     const arrayOfPages = Array.from(
       { length: AppConfig.numberOfPages },
-      (item, index) => index + 1
+      (item, index) => index
     );
     const shuffleArrayOfPages = shuffle(arrayOfPages);
     setPages(shuffleArrayOfPages);
@@ -43,7 +43,7 @@ function GamePage() {
   useState(() => {
     const arrayOfGroups = Array.from(
       { length: AppConfig.numberOfGroups },
-      (item, index) => index + 1
+      (item, index) => index
     );
     const shuffleArrayOfPages = shuffle(arrayOfGroups);
     setGroup(shuffleArrayOfPages[0]);
