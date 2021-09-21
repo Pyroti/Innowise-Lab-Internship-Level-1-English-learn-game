@@ -31,6 +31,15 @@ const StartButton = styled.div`
       transition: 0.3s;
     }
   }
+
+  @media (max-width: 630px) {
+    border: 3px ${color.buttonHover} solid;
+    border-radius: 40px;
+    &::after {
+      margin-left: 20px;
+      transition: 0.3s;
+    }
+  }
 `;
 
 export default StartButton;
