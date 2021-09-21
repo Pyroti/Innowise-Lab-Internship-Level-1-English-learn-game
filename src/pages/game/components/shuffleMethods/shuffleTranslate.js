@@ -1,20 +1,20 @@
-import AppConfig from '../../../../core/constants/AppConfig';
 import shuffle from './shuffle';
 
-const threeWordsInGroup = 3;
-const sixGroups = 6;
+const partOfWordsInGroup = 3;
+const maxNumberOfGroups = 6;
 
 export default function shuffleTranslate(words) {
   let massWords = [];
   const setShuffleWord = [];
 
   words.forEach((item, index) => {
-    if ((index + AppConfig.defaultOne) % threeWordsInGroup === 0) {
+    const isPartOfWordsInGroup = ((index + 1) % partOfWordsInGroup === 0);
+    if (isPartOfWordsInGroup) {
       massWords.push(item);
       const word = shuffle(massWords);
       setShuffleWord.push(word);
       massWords = [];
-    } else if (setShuffleWord.length >= sixGroups) {
+    } else if (setShuffleWord.length >= maxNumberOfGroups) {
       setShuffleWord.push(item);
     } else {
       massWords.push(item);

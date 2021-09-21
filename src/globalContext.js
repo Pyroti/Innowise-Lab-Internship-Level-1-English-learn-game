@@ -5,6 +5,6 @@ export const initialStateStatistics = {
   wrongAnswers: []
 };
 
-const StatisticsContext = React.createContext(initialStateStatistics);
+const GlobalContext = React.createContext(0);
 
-export default StatisticsContext;
+export default GlobalContext;

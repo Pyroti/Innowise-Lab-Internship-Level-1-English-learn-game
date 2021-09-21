@@ -1,45 +1,39 @@
 import PropTypes from 'prop-types';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Redirect } from 'react-router-dom';
 import correctAnswerSound from '../../../../assets/music/correctAnswer.mp3';
+import gameStartSound from '../../../../assets/music/gameStartSound.mp3';
 import wrongAnswerSound from '../../../../assets/music/wrongAnswer.mp3';
 import AppConfig from '../../../../core/constants/AppConfig';
 import MainRouters from '../../../../core/constants/MainRouters';
 import timerConfig from '../../../../core/constants/timerConfig';
 import urls from '../../../../core/constants/urls';
-import PointsContext from '../../../../pointsContext';
-import StatisticsContext from '../../../../statisticsContext';
+import GlobalContext from '../../../../globalContext';
 import GameWrapper from '../../styled/GameWrapper';
 import Timer from '../timer/Timer';
-import GamePointsBorder from './componenst/gamePointerBorder/GamePointsBorder';
+import GamePointsBorder from './components/gamePointerBorder/GamePointsBorder';
+import GameSoundButton from './components/gameSoundButton/GameSoundButton';
 import AnswerButton from './styled/AnswerButton';
 import AnswerButtonsWrap from './styled/AnswerButtonsWrap';
-import MusicButton from './styled/MusicButton';
 import ScoreRatio from './styled/ScoreRatio';
+import VoiceWordButton from './styled/VoiceWordButton';
 import WordCard from './styled/WordCard';
-
-const multiplyСoefficient = 2;
-const initialCorrectAnswers = 1;
-const initialScoreRation = 10;
-const initialValueScoreRatio = 10;
-const threeCorrectAnswers = 3;
-const sixCorrectAnswers = 6;
-const initialPointsBorderValue = 0;
 
 function GameContent(props) {
   const {
-    words, wordId, shuffleTranslation, setNewPageWithWords, setWordId
+    words, wordId,
+    shuffleTranslation, setNewPageWithWords,
+    setWordId, isTurnOnSound, setIsTurnOnSound
   } = props;
-  const [, setAnswers] = useContext(StatisticsContext);
-  const [point, setPoint] = useContext(PointsContext);
-  const [scoreRatio, setScoreRatio] = useState(initialScoreRation);
+  const {
+    point, setPoint, setAnswers, setIsGamePage, setIsShowGameModal
+  } = useContext(GlobalContext);
+  const [scoreRatio, setScoreRatio] = useState(AppConfig.initialScoreRation);
   const [corNumUserAnswers, setCorNumUserAnswers] = useState(
-    initialCorrectAnswers
+    AppConfig.initialCorrectAnswers
   );
-  const [pointsBorderValue, setPointsBorderValue] = useState(
-    initialPointsBorderValue
-  );
+  const [pointsBorderValue, setPointsBorderValue] = useState(0);
   const [redirect, setRedirect] = useState(false);
 
   const { t } = useTranslation();
@@ -51,50 +45,61 @@ function GameContent(props) {
     new Audio(audioFile).play();
   };
 
+  useEffect(() => {
+    playAudio(gameStartSound);
+    setIsGamePage(true);
+    setIsShowGameModal(false);
+  }, [setIsGamePage, setIsShowGameModal]);
+
   const setPointInfo = () => {
     setPoint((prevPoint) => prevPoint + scoreRatio);
     setCorNumUserAnswers(
-      (prevCorrectNumber) => prevCorrectNumber + AppConfig.defaultOne
+      (prevCorrectNumber) => prevCorrectNumber + 1
     );
-    if (corNumUserAnswers === threeCorrectAnswers) {
-      setScoreRatio((prevCoefPoint) => prevCoefPoint * multiplyСoefficient);
-    } else if (corNumUserAnswers === sixCorrectAnswers) {
-      setScoreRatio((prevCoefPoint) => prevCoefPoint * multiplyСoefficient);
+    if (corNumUserAnswers === AppConfig.threeCorrectAnswers) {
+      setScoreRatio((prevCoefPoint) => prevCoefPoint * AppConfig.multiplyСoefficient);
+    } else if (corNumUserAnswers === AppConfig.sixCorrectAnswers) {
+      setScoreRatio((prevCoefPoint) => prevCoefPoint * AppConfig.multiplyСoefficient);
     }
   };
 
   const setWindowCorrectAnswers = () => {
     setPointsBorderValue(
-      (prevPointsBorderValue) => prevPointsBorderValue + AppConfig.defaultOne
+      (prevPointsBorderValue) => prevPointsBorderValue + 1
     );
-    if (pointsBorderValue >= threeCorrectAnswers) {
-      setPointsBorderValue(AppConfig.defaultOne);
+    if (pointsBorderValue >= AppConfig.threeCorrectAnswers) {
+      setPointsBorderValue(1);
     }
   };
 
   const setRightAnswer = () => {
     setPointInfo();
     setWindowCorrectAnswers();
-    playAudio(correctAnswerSound);
+
     setAnswers((prevAnswers) => ({
       ...prevAnswers,
       rightAnswers: [...prevAnswers.rightAnswers, words[wordId]]
     }));
+    if (isTurnOnSound) {
+      playAudio(correctAnswerSound);
+    }
   };
 
   const setWrongAnswer = () => {
-    setScoreRatio(initialValueScoreRatio);
-    setCorNumUserAnswers(initialCorrectAnswers);
-    setPointsBorderValue(initialPointsBorderValue);
-    playAudio(wrongAnswerSound);
+    setScoreRatio(AppConfig.initialScoreRation);
+    setCorNumUserAnswers(AppConfig.initialCorrectAnswers);
+    setPointsBorderValue(0);
     setAnswers((prevAnswers) => ({
       ...prevAnswers,
       wrongAnswers: [...prevAnswers.wrongAnswers, words[wordId]]
     }));
+    if (isTurnOnSound) {
+      playAudio(wrongAnswerSound);
+    }
   };
 
   const checkAnswer = (isAnswer) => {
-    setWordId(wordId + AppConfig.defaultOne);
+    setWordId(wordId + 1);
     setNewPageWithWords();
     const isRight = words[wordId].wordTranslate === shuffleTranslation[wordId];
     if (isRight === isAnswer) {
@@ -104,10 +109,16 @@ function GameContent(props) {
     }
   };
 
-  const redirectToStatistics = () => setRedirect(true);
   const onGiveRightAnswer = () => checkAnswer(true);
   const onGiveWrongAnswer = () => checkAnswer(false);
   const turnOnSound = () => playAudio(audioSrc);
+
+  const redirectToStatistics = () => {
+    setRedirect(true);
+    if (isTurnOnSound) {
+      playAudio(gameStartSound);
+    }
+  };
 
   if (redirect) {
     return <Redirect to={MainRouters.statistics} />;
@@ -119,6 +130,7 @@ function GameContent(props) {
         seconds={timerConfig.secondsForGame}
         size={timerConfig.sizeForGameTimer}
         command={redirectToStatistics}
+        isTurnOnSound={isTurnOnSound}
       />
       <GameWrapper>
         <h1>{point}</h1>
@@ -130,8 +142,8 @@ function GameContent(props) {
         <WordCard>{word}</WordCard>
         <WordCard>{shuffleTranslation[wordId]}</WordCard>
 
-        <MusicButton playAudio={turnOnSound} />
-
+        <VoiceWordButton playAudio={turnOnSound} />
+        <GameSoundButton isTurnOnSound={isTurnOnSound} setIsTurnOnSound={setIsTurnOnSound} />
         <AnswerButtonsWrap>
           <AnswerButton onClick={onGiveRightAnswer} type="button">
             {t('right')}
@@ -150,7 +162,9 @@ GameContent.propTypes = {
   wordId: PropTypes.number.isRequired,
   shuffleTranslation: PropTypes.instanceOf(Array).isRequired,
   setNewPageWithWords: PropTypes.func.isRequired,
-  setWordId: PropTypes.func.isRequired
+  setWordId: PropTypes.func.isRequired,
+  isTurnOnSound: PropTypes.bool.isRequired,
+  setIsTurnOnSound: PropTypes.func.isRequired
 };
 
 export default GameContent;

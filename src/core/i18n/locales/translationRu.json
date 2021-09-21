@@ -17,5 +17,9 @@
   "numWrongAnswers": "Количество неправильных ответов:",
   "percentageCorrectAnswers": "Процент правильных ответов:",
   "restartGame": "Сыграть еще раз",
-  "printToPdf": "Распечатать в PDF"
+  "printToPdf": "Распечатать в PDF",
+  "theGameIsNotOver": "Игра не окончена!",
+  "TheResultAreReset": "Если вы закроете игру ваши результаты обнулятся.",
+  "CloseTheGame": "Закрыть игру",
+  "Cancel": "Отмена"
 }

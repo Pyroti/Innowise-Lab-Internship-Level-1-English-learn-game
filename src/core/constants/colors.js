@@ -8,7 +8,17 @@ const colors = {
   loaderBorder: '#f3f3f3',
   loaderBorderTop: '#3498db',
   pointBorder: '#FB6589',
-  backgroundContentWrapper: '#fff'
+  backgroundContentWrapper: '#fff',
+
+  GameModalWrapper_background: '#fff',
+  GameModalWrapper_color: '#000',
+  GameModalWrapper_shadow: 'rgba(0,0,0,0.2)',
+
+  GameModalContent_color: '#141414',
+  GameModalContent_button_background: '#141414',
+  GameModalContent_button_color: '#fff',
+
+  GameModalBackground_background: 'rgba(0,0,0,0.8)'
 };
 
 export default colors;

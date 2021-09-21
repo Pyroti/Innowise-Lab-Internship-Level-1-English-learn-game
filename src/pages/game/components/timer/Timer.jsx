@@ -1,28 +1,53 @@
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
-import AppConfig from '../../../../core/constants/AppConfig';
+import React, {
+  useContext, useEffect, useState
+} from 'react';
 import timerConfig from '../../../../core/constants/timerConfig';
+import GlobalContext from '../../../../globalContext';
 import RevolvingCircle from './styled/RevolvingCircle';
 import TimeElement from './styled/TimeElement';
 import TimeWrapper from './styled/TimeWrapper';
 
 function Timer(props) {
-  const { seconds, size, command } = props;
+  const {
+    seconds, size, command, isTurnOnSound
+  } = props;
   const [time, setTime] = useState(seconds);
+  const [isSoundTimer, setIsSoundTimer] = useState(true);
+  const { soundTimer, isTimerPlay } = useContext(GlobalContext);
 
   useEffect(() => {
     let timerId = null;
 
-    if (time) {
+    if (time && isTimerPlay) {
       timerId = setInterval(() => {
-        setTime((prevTime) => prevTime - AppConfig.defaultOne);
+        setTime((prevTime) => prevTime - 1);
       }, timerConfig.secondForTimer);
     }
 
     return () => {
       clearInterval(timerId);
     };
-  }, [time]);
+  }, [time, isTimerPlay]);
+
+  useEffect(() => {
+    const timerCountdownSound = () => {
+      if (isSoundTimer && isTurnOnSound) {
+        soundTimer.load();
+        setTimeout(() => {
+          soundTimer.play();
+        }, 0);
+        setIsSoundTimer(false);
+      } else if (!isTurnOnSound) {
+        soundTimer.pause();
+        soundTimer.currentTime = 0;
+        setIsSoundTimer(true);
+      }
+    };
+    if (time <= timerConfig.timerAlmostOver) {
+      timerCountdownSound();
+    }
+  }, [time, isSoundTimer, soundTimer, isTurnOnSound]);
 
   if (!time) {
     command();
@@ -31,7 +56,7 @@ function Timer(props) {
   return (
     <TimeWrapper size={size}>
       <RevolvingCircle size={size} />
-      <TimeElement>{time}</TimeElement>
+      <TimeElement>{isTimerPlay ? time : '| |'}</TimeElement>
     </TimeWrapper>
   );
 }
@@ -39,7 +64,8 @@ function Timer(props) {
 Timer.propTypes = {
   seconds: PropTypes.number.isRequired,
   size: PropTypes.string.isRequired,
-  command: PropTypes.func.isRequired
+  command: PropTypes.func.isRequired,
+  isTurnOnSound: PropTypes.bool.isRequired
 };
 
 export default Timer;

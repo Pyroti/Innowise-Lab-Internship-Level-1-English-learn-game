@@ -17,5 +17,9 @@
   "numWrongAnswers": "Number of wrong answers:",
   "percentageCorrectAnswers": "Percentage of correct answers:",
   "restartGame": "Restart Game",
-  "printToPdf": "Print to PDF"
+  "printToPdf": "Print to PDF",
+  "theGameIsNotOver": "The Game is not over!",
+  "TheResultAreReset": "If you close the game your the results are reset.",
+  "CloseTheGame": "Close the game",
+  "Cancel": "Cancel"
 }

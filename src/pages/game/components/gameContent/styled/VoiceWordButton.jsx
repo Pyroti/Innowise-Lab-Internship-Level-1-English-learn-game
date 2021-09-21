@@ -4,28 +4,28 @@ import React from 'react';
 import styled from 'styled-components';
 import colors from '../../../../../core/constants/colors';
 
-const MusicButtonStyled = styled.button`
+const VoiceWordButtonStyled = styled.button`
   background-color: ${colors.colorless};
   padding: 0;
   border: none;
   cursor: pointer;
   position: absolute;
   transform: scale(1.5);
-  right: 15px;
+  right: 65px;
   top: 15px;
 `;
 
-const MusicButton = (props) => {
+const VoiceWordButton = (props) => {
   const { playAudio } = props;
   return (
-    <MusicButtonStyled onClick={playAudio}>
+    <VoiceWordButtonStyled onClick={playAudio}>
       <MusicNoteIcon />
-    </MusicButtonStyled>
+    </VoiceWordButtonStyled>
   );
 };
 
-MusicButton.propTypes = {
+VoiceWordButton.propTypes = {
   playAudio: PropTypes.func.isRequired
 };
 
-export default MusicButton;
+export default VoiceWordButton;

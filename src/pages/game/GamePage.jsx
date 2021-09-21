@@ -1,28 +1,24 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, {
+  useCallback, useContext, useEffect, useState
+} from 'react';
 import { useTranslation } from 'react-i18next';
+import ErrorPage from '../../core/components/error/ErrorPage';
 import Loader from '../../core/components/styled/Loader';
 import AppConfig from '../../core/constants/AppConfig';
 import timerConfig from '../../core/constants/timerConfig';
 import urls from '../../core/constants/urls';
+import GlobalContext from '../../globalContext';
 import GameContent from './components/gameContent/GameContent';
 import shuffle from './components/shuffleMethods/shuffle';
 import shuffleTranslate from './components/shuffleMethods/shuffleTranslate';
 import Timer from './components/timer/Timer';
 import GamePageMain from './styled/GamePageMain';
 
-const initialWordId = 0;
-const initialPageNumber = 0;
-const initialCurrentIndex = 0;
-const wordsAnswered = 15;
-const group = 3;
-const numberOfPages = 29;
-const offsetByFive = -5;
-
 function GamePage() {
   const { t } = useTranslation();
-  const [wordId, setWordId] = useState(initialWordId);
-  const [pageNumber, setPageNumber] = useState(initialPageNumber);
-  const [currentIndex, setCurrentIndex] = useState(initialCurrentIndex);
+  const [wordId, setWordId] = useState(0);
+  const [pageNumber, setPageNumber] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [isTimeLoader, setIsTimeLoader] = useState(false);
 
   const [dictionary, setDictionary] = useState([]);
@@ -31,11 +27,22 @@ function GamePage() {
   const [isError, setIsError] = useState(false);
 
   const [pages, setPages] = useState([]);
+  const [group, setGroup] = useState([]);
+
+  const { isTurnOnSound, setIsTurnOnSound } = useContext(GlobalContext);
 
   useState(() => {
-    const pg = Array.from({ length: numberOfPages }, (item, index) => index);
-    const shufflePg = shuffle(pg);
-    setPages(shufflePg);
+    const arrayOfPages = Array.from({ length: AppConfig.numberOfPages },
+      (item, index) => index + 1);
+    const shuffleArrayOfPages = shuffle(arrayOfPages);
+    setPages(shuffleArrayOfPages);
+  });
+
+  useState(() => {
+    const arrayOfGroups = Array.from({ length: AppConfig.numberOfGroups },
+      (item, index) => index + 1);
+    const shuffleArrayOfPages = shuffle(arrayOfGroups);
+    setGroup(shuffleArrayOfPages[0]);
   });
 
   const wordsUrl = `${urls.wordsUrl}/words?page=${pages[pageNumber]}&group=${group}`;
@@ -63,12 +70,12 @@ function GamePage() {
   }, [wordsUrl, receivedDataProcessing]);
 
   const setNewPageWithWords = () => {
-    if (currentIndex === wordsAnswered) {
-      setPageNumber((prevPageNumber) => prevPageNumber + AppConfig.defaultOne);
-      setCurrentIndex(offsetByFive);
+    if (currentIndex === AppConfig.wordsAnswered) {
+      setPageNumber((prevPageNumber) => prevPageNumber + 1);
+      setCurrentIndex(AppConfig.offsetByFive);
     } else {
       setCurrentIndex(
-        (prevCurrentIndex) => prevCurrentIndex + AppConfig.defaultOne
+        (prevCurrentIndex) => prevCurrentIndex + 1
       );
     }
   };
@@ -78,7 +85,11 @@ function GamePage() {
   if (!isTimeLoader) {
     return (
       <GamePageMain>
-        <Timer seconds={timerConfig.secondsReadyGame} command={setLoaderTime} />
+        <Timer
+          seconds={timerConfig.secondsReadyGame}
+          command={setLoaderTime}
+          isTurnOnSound={isTurnOnSound}
+        />
         <h2>{t('getReady')}</h2>
       </GamePageMain>
     );
@@ -86,15 +97,13 @@ function GamePage() {
 
   if (isError) {
     return (
-      <GamePageMain>
-        <div>{t('error')}</div>
-      </GamePageMain>
+      <ErrorPage />
     );
   }
 
   return (
     <GamePageMain>
-      {dictionary.length === AppConfig.defaultZero ? (
+      {dictionary.length === 0 ? (
         <Loader />
       ) : (
         <GameContent
@@ -103,6 +112,8 @@ function GamePage() {
           wordId={wordId}
           words={dictionary}
           shuffleTranslation={shuffleTranslation}
+          isTurnOnSound={isTurnOnSound}
+          setIsTurnOnSound={setIsTurnOnSound}
         />
       )}
     </GamePageMain>

@@ -1,25 +1,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import AppConfig from '../../../../core/constants/AppConfig';
+import countingResults from './countingResults/countingResults';
 import GameScore from './styled/GameScore';
 import GameScoreWrap from './styled/GameScoreWrap';
-
-const oneHundredPercent = 100;
 
 export default function GameStatistics(props) {
   const { answers, point } = props;
   const { t } = useTranslation();
-  const numCorrectAnswers = answers.rightAnswers.length;
-  const numWrongAnswers = answers.wrongAnswers.length;
-  let sumAllAnswers = numWrongAnswers + numCorrectAnswers;
-  sumAllAnswers = sumAllAnswers === AppConfig.defaultZero
-    ? AppConfig.defaultOne
-    : sumAllAnswers;
-  const percentageCorrectAnswers = (
-    (numCorrectAnswers / sumAllAnswers)
-    * oneHundredPercent
-  ).toFixed(1);
+  const { numCorrectAnswers, numWrongAnswers, percentageCorrectAnswers } = countingResults(answers);
 
   return (
     <GameScoreWrap>

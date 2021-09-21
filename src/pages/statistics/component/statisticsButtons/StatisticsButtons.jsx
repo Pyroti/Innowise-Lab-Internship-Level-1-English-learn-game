@@ -5,14 +5,9 @@ import React, {
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import ReactToPdf from 'react-to-pdf';
-import AppConfig from '../../../../core/constants/AppConfig';
 import MainRouters from '../../../../core/constants/MainRouters';
-import optionsForPDFLaptop from '../../../../core/constants/optionsForPDFLaptop';
-import optionsForPDFMobile from '../../../../core/constants/optionsForPDFMobile';
-import PointsContext from '../../../../pointsContext';
-import StatisticsContext, {
-  initialStateStatistics
-} from '../../../../statisticsContext';
+import optionsForPDF from '../../../../core/constants/optionsForPDF';
+import GlobalContext from '../../../../globalContext';
 import StatisticsButton from './styled/StatisticsButton';
 import StatisticsButtonWrap from './styled/StatisticsButtonWrap';
 
@@ -23,28 +18,22 @@ const defaultPdfPositionYMobile = 10;
 const screenWidthMobile = 980;
 
 function StatisticsButtons(props) {
-  const [options, SetOptions] = useState(optionsForPDFLaptop);
+  const [options, SetOptions] = useState(optionsForPDF.optionsForPDFLaptop);
   const [position, SetPosition] = useState([
     defaultPdfPositionXLaptop,
     defaultPdfPositionYLaptop
   ]);
   const { trRef } = props;
-  const [, setAnswers] = useContext(StatisticsContext);
-  const [, setPoint] = useContext(PointsContext);
+  const { reset } = useContext(GlobalContext);
   const { t } = useTranslation();
-
-  const reset = () => {
-    setAnswers(initialStateStatistics);
-    setPoint(AppConfig.initialPoint);
-  };
 
   useEffect(() => {
     const setMobile = () => {
       if (window.outerWidth <= screenWidthMobile) {
-        SetOptions(optionsForPDFMobile);
+        SetOptions(optionsForPDF.optionsForPDFMobile);
         SetPosition([defaultPdfPositionXMobile, defaultPdfPositionYMobile]);
       } else {
-        SetOptions(optionsForPDFLaptop);
+        SetOptions(optionsForPDF.optionsForPDFLaptop);
         SetPosition([defaultPdfPositionXLaptop, defaultPdfPositionYLaptop]);
       }
     };
