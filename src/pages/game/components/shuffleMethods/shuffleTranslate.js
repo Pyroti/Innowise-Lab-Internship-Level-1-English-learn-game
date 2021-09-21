@@ -8,7 +8,7 @@ export default function shuffleTranslate(words) {
   const setShuffleWord = [];
 
   words.forEach((item, index) => {
-    const isPartOfWordsInGroup = ((index + 1) % partOfWordsInGroup === 0);
+    const isPartOfWordsInGroup = (index + 1) % partOfWordsInGroup === 0;
     if (isPartOfWordsInGroup) {
       massWords.push(item);
       const word = shuffle(massWords);

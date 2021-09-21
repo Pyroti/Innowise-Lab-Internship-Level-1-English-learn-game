@@ -22,9 +22,13 @@ import WordCard from './styled/WordCard';
 
 function GameContent(props) {
   const {
-    words, wordId,
-    shuffleTranslation, setNewPageWithWords,
-    setWordId, isTurnOnSound, setIsTurnOnSound
+    words,
+    wordId,
+    shuffleTranslation,
+    setNewPageWithWords,
+    setWordId,
+    isTurnOnSound,
+    setIsTurnOnSound
   } = props;
   const {
     point, setPoint, setAnswers, setIsGamePage, setIsShowGameModal
@@ -53,20 +57,20 @@ function GameContent(props) {
 
   const setPointInfo = () => {
     setPoint((prevPoint) => prevPoint + scoreRatio);
-    setCorNumUserAnswers(
-      (prevCorrectNumber) => prevCorrectNumber + 1
-    );
+    setCorNumUserAnswers((prevCorrectNumber) => prevCorrectNumber + 1);
     if (corNumUserAnswers === AppConfig.threeCorrectAnswers) {
-      setScoreRatio((prevCoefPoint) => prevCoefPoint * AppConfig.multiplyСoefficient);
+      setScoreRatio(
+        (prevCoefPoint) => prevCoefPoint * AppConfig.multiplyСoefficient
+      );
     } else if (corNumUserAnswers === AppConfig.sixCorrectAnswers) {
-      setScoreRatio((prevCoefPoint) => prevCoefPoint * AppConfig.multiplyСoefficient);
+      setScoreRatio(
+        (prevCoefPoint) => prevCoefPoint * AppConfig.multiplyСoefficient
+      );
     }
   };
 
   const setWindowCorrectAnswers = () => {
-    setPointsBorderValue(
-      (prevPointsBorderValue) => prevPointsBorderValue + 1
-    );
+    setPointsBorderValue((prevPointsBorderValue) => prevPointsBorderValue + 1);
     if (pointsBorderValue >= AppConfig.threeCorrectAnswers) {
       setPointsBorderValue(1);
     }
@@ -143,7 +147,10 @@ function GameContent(props) {
         <WordCard>{shuffleTranslation[wordId]}</WordCard>
 
         <VoiceWordButton playAudio={turnOnSound} />
-        <GameSoundButton isTurnOnSound={isTurnOnSound} setIsTurnOnSound={setIsTurnOnSound} />
+        <GameSoundButton
+          isTurnOnSound={isTurnOnSound}
+          setIsTurnOnSound={setIsTurnOnSound}
+        />
         <AnswerButtonsWrap>
           <AnswerButton onClick={onGiveRightAnswer} type="button">
             {t('right')}

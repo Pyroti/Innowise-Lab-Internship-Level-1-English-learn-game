@@ -17,7 +17,7 @@ const GameModalContent = styled.div`
     background: ${color.GameModalContent_button_background};
     color: ${color.GameModalContent_button_color};
     border: none;
-    cursor: pointer;  
+    cursor: pointer;
     margin-bottom: 20px;
   }
 `;

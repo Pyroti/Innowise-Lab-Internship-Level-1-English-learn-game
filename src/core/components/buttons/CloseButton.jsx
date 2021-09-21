@@ -8,7 +8,12 @@ import HeaderButtonStyled from './styled/HeaderButtonStyled';
 
 function CloseButton() {
   const {
-    reset, isGamePage, isShowGameModal, setIsShowGameModal, setIsTimerPlay, setIsTurnOnSound
+    reset,
+    isGamePage,
+    isShowGameModal,
+    setIsShowGameModal,
+    setIsTimerPlay,
+    setIsTurnOnSound
   } = useContext(GlobalContext);
 
   const openGameModal = () => {
@@ -18,7 +23,11 @@ function CloseButton() {
   if (isGamePage) {
     return (
       <>
-        <HeaderButtonStyled onClick={openGameModal} isActive={false} value="close">
+        <HeaderButtonStyled
+          onClick={openGameModal}
+          isActive={false}
+          value="close"
+        >
           <CloseIcon />
         </HeaderButtonStyled>
         <GameModal

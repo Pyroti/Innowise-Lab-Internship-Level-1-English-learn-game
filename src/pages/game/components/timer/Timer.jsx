@@ -1,7 +1,5 @@
 import PropTypes from 'prop-types';
-import React, {
-  useContext, useEffect, useState
-} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import timerConfig from '../../../../core/constants/timerConfig';
 import GlobalContext from '../../../../globalContext';
 import RevolvingCircle from './styled/RevolvingCircle';

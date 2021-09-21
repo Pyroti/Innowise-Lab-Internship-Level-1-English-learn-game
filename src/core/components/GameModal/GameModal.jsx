@@ -11,7 +11,10 @@ import GameModalWrapper from './styled/GameModalWrapper';
 function GameModal(props) {
   const { t } = useTranslation();
   const {
-    isShowGameModal, setIsShowGameModal, setIsTimerPlay, setIsTurnOnSound
+    isShowGameModal,
+    setIsShowGameModal,
+    setIsTimerPlay,
+    setIsTurnOnSound
   } = props;
   const modalRef = useRef();
 
@@ -40,36 +43,34 @@ function GameModal(props) {
     [isShowGameModal, setIsShowGameModal]
   );
 
-  useEffect(
-    () => {
-      document.addEventListener('keydown', keyPress);
-      return () => document.removeEventListener('keydown', keyPress);
-    },
-    [keyPress]
-  );
+  useEffect(() => {
+    document.addEventListener('keydown', keyPress);
+    return () => document.removeEventListener('keydown', keyPress);
+  }, [keyPress]);
 
   const showGameModal = () => setIsShowGameModal((prev) => !prev);
 
   return (
     <>
-      {isShowGameModal
-        ? (
-          <GameModalBackground onClick={closeModal} ref={modalRef}>
-            <GameModalWrapper isShowGameModal={isShowGameModal}>
-              <GameModalContent>
-                <h1>{t('theGameIsNotOver')}</h1>
-                <p>{t('TheResultAreReset')}</p>
-                <Link to={MainRouters.home}>
-                  <button type="button" onClick={showGameModal}>{t('CloseTheGame')}</button>
-                </Link>
-                <button type="button" onClick={showGameModal}>{t('Cancel')}</button>
-              </GameModalContent>
-              <CloseModalIcon
-                onClick={showGameModal}
-              />
-            </GameModalWrapper>
-          </GameModalBackground>
-        ) : null}
+      {isShowGameModal ? (
+        <GameModalBackground onClick={closeModal} ref={modalRef}>
+          <GameModalWrapper isShowGameModal={isShowGameModal}>
+            <GameModalContent>
+              <h1>{t('theGameIsNotOver')}</h1>
+              <p>{t('TheResultAreReset')}</p>
+              <Link to={MainRouters.home}>
+                <button type="button" onClick={showGameModal}>
+                  {t('CloseTheGame')}
+                </button>
+              </Link>
+              <button type="button" onClick={showGameModal}>
+                {t('Cancel')}
+              </button>
+            </GameModalContent>
+            <CloseModalIcon onClick={showGameModal} />
+          </GameModalWrapper>
+        </GameModalBackground>
+      ) : null}
     </>
   );
 }

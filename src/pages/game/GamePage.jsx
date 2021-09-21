@@ -32,15 +32,19 @@ function GamePage() {
   const { isTurnOnSound, setIsTurnOnSound } = useContext(GlobalContext);
 
   useState(() => {
-    const arrayOfPages = Array.from({ length: AppConfig.numberOfPages },
-      (item, index) => index + 1);
+    const arrayOfPages = Array.from(
+      { length: AppConfig.numberOfPages },
+      (item, index) => index + 1
+    );
     const shuffleArrayOfPages = shuffle(arrayOfPages);
     setPages(shuffleArrayOfPages);
   });
 
   useState(() => {
-    const arrayOfGroups = Array.from({ length: AppConfig.numberOfGroups },
-      (item, index) => index + 1);
+    const arrayOfGroups = Array.from(
+      { length: AppConfig.numberOfGroups },
+      (item, index) => index + 1
+    );
     const shuffleArrayOfPages = shuffle(arrayOfGroups);
     setGroup(shuffleArrayOfPages[0]);
   });
@@ -74,9 +78,7 @@ function GamePage() {
       setPageNumber((prevPageNumber) => prevPageNumber + 1);
       setCurrentIndex(AppConfig.offsetByFive);
     } else {
-      setCurrentIndex(
-        (prevCurrentIndex) => prevCurrentIndex + 1
-      );
+      setCurrentIndex((prevCurrentIndex) => prevCurrentIndex + 1);
     }
   };
 
@@ -96,9 +98,7 @@ function GamePage() {
   }
 
   if (isError) {
-    return (
-      <ErrorPage />
-    );
+    return <ErrorPage />;
   }
 
   return (
