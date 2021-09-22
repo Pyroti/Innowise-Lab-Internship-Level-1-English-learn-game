@@ -1,5 +1,25 @@
 {
   "welcome": "Welcome!",
   "start": "Start game",
-  "getReady": "Get ready"
+  "getReady": "Get ready",
+  "ru": "ru",
+  "en": "en",
+  "error": "Something went wrong ...",
+  "loading": "Loading ...",
+  "right": "Right",
+  "wrong": "Wrong",
+  "playerGets": "The player gets",
+  "rightAnswers": "Right answers:",
+  "wrongAnswers": "Wrong answers:",
+  "youScored": "You Scored:",
+  "points": "points",
+  "numCorrectAnswers": "Number of correct answers:",
+  "numWrongAnswers": "Number of wrong answers:",
+  "percentageCorrectAnswers": "Percentage of correct answers:",
+  "restartGame": "Restart Game",
+  "printToPdf": "Print to PDF",
+  "theGameIsNotOver": "The Game is not over!",
+  "TheResultAreReset": "If you close the game your the results are reset.",
+  "CloseTheGame": "Close the game",
+  "Cancel": "Cancel"
 }
