@@ -1,7 +1,10 @@
 import PropTypes from 'prop-types';
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, {
+  useCallback, useContext, useEffect, useRef
+} from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import GlobalContext from '../../../globalContext';
 import MainRouters from '../../constants/MainRouters';
 import CloseModalIcon from './styled/CloseModalIcon';
 import GameModalBackground from './styled/GameModalBackground';
@@ -16,6 +19,9 @@ function GameModal(props) {
     setIsTimerPlay,
     setIsTurnOnSound
   } = props;
+
+  const { reset } = useContext(GlobalContext);
+
   const modalRef = useRef();
 
   useEffect(() => {
@@ -50,6 +56,11 @@ function GameModal(props) {
 
   const showGameModal = () => setIsShowGameModal((prev) => !prev);
 
+  const closeTheGame = () => {
+    showGameModal();
+    reset();
+  };
+
   return (
     <>
       {isShowGameModal ? (
@@ -59,7 +70,7 @@ function GameModal(props) {
               <h1>{t('theGameIsNotOver')}</h1>
               <p>{t('TheResultAreReset')}</p>
               <Link to={MainRouters.home}>
-                <button type="button" onClick={showGameModal}>
+                <button type="button" onClick={closeTheGame}>
                   {t('CloseTheGame')}
                 </button>
               </Link>
